@@ -7,9 +7,5 @@ const StyledButton = styled.button`
 `;
 
 export function Button({ text, onClick }: ButtonProps) {
-  return (
-    <StyledButton className="button" onClick={onClick}>
-      {text}
-    </StyledButton>
-  );
+  return <StyledButton onClick={onClick}>{text}</StyledButton>;
 }

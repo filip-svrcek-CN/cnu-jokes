@@ -1,12 +1,12 @@
 import "./App.css";
-import { Button } from "./components/Button";
+import { Controls } from "./modules/Controls";
 import { Header } from "./components/Header";
 
 function App() {
   return (
     <div>
       <Header />
-      <Button text={"ANOTHER ONE!"} />
+      <Controls />
     </div>
   );
 }
