@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { getRandomJoke } from "../api";
+import { getRandomJokes } from "../api";
 
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
@@ -19,11 +21,11 @@ export function Controls() {
   return (
     <StyledControls>
       <Col>
-        <Button text={"ANOTHER ONE!"} />
+        <Button text={"ANOTHER ONE!"} onClick={getRandomJoke} />
       </Col>
       <Col>
         <Input />
-        <Button text={"...MORE!"} />
+        <Button text={"...MORE!"} onClick={() => getRandomJokes(5)} />
       </Col>
     </StyledControls>
   );

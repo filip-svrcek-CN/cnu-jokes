@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-type ButtonProps = { text: string; onClick?: () => void };
+type ButtonProps = {
+  text: string;
+  onClick: (event: React.MouseEvent<HTMLElement>, value?: number) => void;
+};
 
 const StyledButton = styled.button`
   margin: 0.5em;
