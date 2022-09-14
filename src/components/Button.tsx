@@ -1,14 +1,15 @@
 import styled from "styled-components";
-
-type ButtonProps = {
-  text: string;
-  onClick: (event: React.MouseEvent<HTMLElement>, value?: number) => void;
-};
+import { getRandomJokes } from "../api";
+import { ButtonProps } from "../types";
 
 const StyledButton = styled.button`
   margin: 0.5em;
 `;
 
-export function Button({ text, onClick }: ButtonProps) {
-  return <StyledButton onClick={onClick}>{text}</StyledButton>;
+export function Button({ text, setJokesToDisplay, inputValue }: ButtonProps) {
+  const handleClick = async () => {
+    const jokes = await getRandomJokes(inputValue || 1);
+    setJokesToDisplay(jokes);
+  };
+  return <StyledButton onClick={handleClick}>{text}</StyledButton>;
 }

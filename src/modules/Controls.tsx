@@ -1,9 +1,12 @@
 import styled from "styled-components";
-import { getRandomJoke } from "../api";
-import { getRandomJokes } from "../api";
 
 import { Button } from "../components/Button";
-import { Input } from "../components/Input";
+import { UseStateSetJokes } from "../types";
+import { InputButton } from "./InputButton";
+
+type ControlsProps = {
+  setJokesToDisplay: UseStateSetJokes;
+};
 
 const StyledControls = styled.div`
   height: 100%;
@@ -17,15 +20,22 @@ const Col = styled.div`
   width: 50%;
 `;
 
-export function Controls() {
+export function Controls({ setJokesToDisplay }: ControlsProps) {
   return (
     <StyledControls>
       <Col>
-        <Button text={"ANOTHER ONE!"} onClick={getRandomJoke} />
+        <Button
+          text={"ANOTHER ONE!"}
+          // fetchData={() => getRandomJokes(1)}
+          setJokesToDisplay={setJokesToDisplay}
+        />
       </Col>
       <Col>
-        <Input />
-        <Button text={"...MORE!"} onClick={() => getRandomJokes(5)} />
+        <InputButton
+          text={"...MORE!"}
+          // fetchData={getRandomJokes}
+          setJokesToDisplay={setJokesToDisplay}
+        />
       </Col>
     </StyledControls>
   );

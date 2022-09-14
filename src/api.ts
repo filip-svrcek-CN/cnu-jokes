@@ -1,24 +1,32 @@
 import axios from "axios";
 
+import { FetchedJoke } from "./types";
+
 export const api = axios.create({
   baseURL: "https://api.chucknorris.io",
 });
 
-export const getRandomJoke = async () => api.get("/jokes/random");
-
 export const getRandomJokes = async (count: number) => {
-  let result = [];
+  let array: FetchedJoke[] = [];
   for (let i = 0; i < count; i++) {
-    result.push(api.get("/jokes/random"));
+    await api.get("jokes/random").then((res) => {
+      array.push(res.data);
+    });
   }
-  return Promise.all(result);
-  //   return result;
+  return array;
 };
 
 export const getCategories = async () => api.get("/jokes/categories");
 
 export const getRandomJokeFromCategory = async (category: string) =>
-  api.get(`/jokes/random?category=${category}`);
+  await api.get(`/jokes/random?category=${category}`);
 
 export const getJokesBySearch = async (query: string) =>
-  api.get(`/jokes/search?${query}`);
+  await api.get(`/jokes/search?${query}`);
+
+export const updateJokesArray = (
+  array: Promise<FetchedJoke>[],
+  joke: Promise<FetchedJoke>
+) => {
+  array.push(joke);
+};
