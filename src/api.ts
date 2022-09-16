@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { FetchedJoke } from "./types";
 
-export const api = axios.create({
+const api = axios.create({
   baseURL: "https://api.chucknorris.io",
 });
 

@@ -12,18 +12,18 @@ export type UseStateSetJokes = React.Dispatch<
   React.SetStateAction<FetchedJoke[]>
 >;
 
-export type ButtonProps = {
-  text: string;
+export type ControlsProps = {
   setJokesToDisplay: UseStateSetJokes;
-  inputValue?: number;
+  jokesToDisplay: FetchedJoke[];
 };
-
-export type InputButtonProps = ButtonProps;
 
 export type JokeCardListProps = {
   jokesToDisplay: FetchedJoke[];
 };
 
-export type InputProps = {
-  setInputValue: React.Dispatch<React.SetStateAction<number | undefined>>;
+export type CountInputProps = {
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+  count: number;
+  setJokesToDisplay: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
+  jokesToDisplay: FetchedJoke[];
 };

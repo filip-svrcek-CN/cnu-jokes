@@ -1,12 +1,8 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { CountInput } from "../components/CountInput";
 
-import { Button } from "../components/Button";
-import { UseStateSetJokes } from "../types";
-import { InputButton } from "./InputButton";
-
-type ControlsProps = {
-  setJokesToDisplay: UseStateSetJokes;
-};
+import { ControlsProps } from "../types";
 
 const StyledControls = styled.div`
   height: 100%;
@@ -17,26 +13,24 @@ const StyledControls = styled.div`
   justify-content: center;
 `;
 const Col = styled.div`
-  width: 50%;
+  width: 33%;
 `;
 
-export function Controls({ setJokesToDisplay }: ControlsProps) {
+export function Controls({ setJokesToDisplay, jokesToDisplay }: ControlsProps) {
+  const [count, setCount] = useState(1);
+
   return (
     <StyledControls>
+      <Col></Col>
       <Col>
-        <Button
-          text={"ANOTHER ONE!"}
-          // fetchData={() => getRandomJokes(1)}
+        <CountInput
+          setCount={setCount}
+          count={count}
           setJokesToDisplay={setJokesToDisplay}
+          jokesToDisplay={jokesToDisplay}
         />
       </Col>
-      <Col>
-        <InputButton
-          text={"...MORE!"}
-          // fetchData={getRandomJokes}
-          setJokesToDisplay={setJokesToDisplay}
-        />
-      </Col>
+      <Col></Col>
     </StyledControls>
   );
 }
