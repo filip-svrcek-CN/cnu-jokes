@@ -21,9 +21,14 @@ export type JokeCardListProps = {
   jokesToDisplay: FetchedJoke[];
 };
 
+export type CategorySelectProps = {
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+};
+
 export type CountInputProps = {
   setCount: React.Dispatch<React.SetStateAction<number>>;
   count: number;
   setJokesToDisplay: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
   jokesToDisplay: FetchedJoke[];
+  selectedCategory: string;
 };

@@ -8,12 +8,6 @@ import { Controls } from "./Controls";
 export function PageContent() {
   const [jokesToDisplay, setJokesToDisplay] = useState<FetchedJoke[]>([]);
 
-  useEffect(() => {
-    getRandomJokes(1).then((res) => {
-      setJokesToDisplay(res);
-    });
-  }, []);
-
   return (
     <div>
       <Controls

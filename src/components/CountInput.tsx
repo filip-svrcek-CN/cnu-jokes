@@ -10,6 +10,7 @@ export function CountInput({
   count,
   setJokesToDisplay,
   jokesToDisplay,
+  selectedCategory,
 }: CountInputProps) {
   const [isDisabled, setIsDisabled] = useState(false);
   const inputElement = useRef<HTMLInputElement>(null);
@@ -30,9 +31,8 @@ export function CountInput({
   };
 
   const addJokes = async (diff: number) => {
-    document.getElementById("root")?.focus();
     setIsDisabled(true);
-    getRandomJokes(diff).then((res) => {
+    getRandomJokes(diff, selectedCategory).then((res) => {
       setJokesToDisplay(jokesToDisplay.concat(res));
       setIsDisabled(false);
     });

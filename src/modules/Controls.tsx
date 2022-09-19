@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { getRandomJokes } from "../api";
+import { CategorySelect } from "../components/CategorySelect";
 import { CountInput } from "../components/CountInput";
 
 import { ControlsProps } from "../types";
@@ -18,16 +20,26 @@ const Col = styled.div`
 
 export function Controls({ setJokesToDisplay, jokesToDisplay }: ControlsProps) {
   const [count, setCount] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  useEffect(() => {
+    getRandomJokes(count, selectedCategory).then((res) =>
+      setJokesToDisplay(res)
+    );
+  }, [selectedCategory]);
 
   return (
     <StyledControls>
-      <Col></Col>
+      <Col>
+        <CategorySelect setSelectedCategory={setSelectedCategory} />
+      </Col>
       <Col>
         <CountInput
           setCount={setCount}
           count={count}
           setJokesToDisplay={setJokesToDisplay}
           jokesToDisplay={jokesToDisplay}
+          selectedCategory={selectedCategory}
         />
       </Col>
       <Col></Col>
