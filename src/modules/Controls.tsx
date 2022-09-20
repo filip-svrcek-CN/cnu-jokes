@@ -42,30 +42,30 @@ export function Controls({ setJokesToDisplay, jokesToDisplay }: ControlsProps) {
     <StyledControls>
       <Col>
         <CategorySelect
+          jokesToDisplay={jokesToDisplay}
+          setJokesToDisplay={setJokesToDisplay}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
-          setJokesToDisplay={setJokesToDisplay}
-          setSearchQuery={setSearchQuery}
-          jokesToDisplay={jokesToDisplay}
           count={count}
+          setSearchQuery={setSearchQuery}
         />
         <CountInput
-          setCount={setCount}
-          count={count}
-          setJokesToDisplay={setJokesToDisplay}
           jokesToDisplay={jokesToDisplay}
+          setJokesToDisplay={setJokesToDisplay}
           selectedCategory={selectedCategory}
+          count={count}
+          setCount={setCount}
           searchQuery={searchQuery}
         />
-        <Button text="Show more random jokes!" onClick={handleShowRandom} />
+        <Button text="New set of random jokes!" onClick={handleShowRandom} />
       </Col>
       <Col>
         <SearchInput
-          setSearchQuery={setSearchQuery}
           setJokesToDisplay={setJokesToDisplay}
-          setCount={setCount}
           setSelectedCategory={setSelectedCategory}
+          setCount={setCount}
           searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
         />
       </Col>
     </StyledControls>

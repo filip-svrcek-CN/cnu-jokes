@@ -29,7 +29,7 @@ export function CountInput({
     const diff: number = newCount - count;
     if (diff > 0) {
       addJokes(diff, searchQuery);
-    } else {
+    } else if (jokesToDisplay.length > newCount) {
       removeJokes(diff);
     }
     setCount(newCount);
@@ -40,18 +40,17 @@ export function CountInput({
     if (searchQuery) {
       getJokesBySearch(searchQuery).then((res) => {
         setJokesToDisplay(res.result.splice(0, jokesToDisplay.length + diff));
-        setIsDisabled(false);
       });
     } else {
       getRandomJokes(diff, jokesToDisplay, selectedCategory).then((res) => {
         setJokesToDisplay(jokesToDisplay.concat(res));
-        setIsDisabled(false);
       });
     }
+    setIsDisabled(false);
   };
 
   const removeJokes = (diff: number) => {
-    setIsDisabled(false);
+    setIsDisabled(true);
     setJokesToDisplay(jokesToDisplay.splice(0, jokesToDisplay.length + diff));
     setIsDisabled(false);
   };
