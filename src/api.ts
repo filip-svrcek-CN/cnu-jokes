@@ -17,21 +17,41 @@ export const getRandomJokes = async (
   category?: string
 ) => {
   let array: FetchedJoke[] = [];
+  const tryLimit = 10;
+  let tries = 0;
   if (category) {
     for (let i = 0; i < count; i++) {
       const response = await api.get(`/jokes/random?category=${category}`);
-      array.concat(displayedJokes).find(({ id }) => id === response.data.id) ===
-      undefined
-        ? array.push(response.data)
-        : i--;
+      if (
+        array
+          .concat(displayedJokes)
+          .find(({ id }) => id === response.data.id) === undefined
+      ) {
+        array.push(response.data);
+        tries = 0;
+      } else if (tries >= tryLimit) {
+        break;
+      } else {
+        i--;
+        tries++;
+      }
     }
   } else {
     for (let i = 0; i < count; i++) {
       const response = await api.get(`/jokes/random`);
-      array.concat(displayedJokes).find(({ id }) => id === response.data.id) ===
-      undefined
-        ? array.push(response.data)
-        : i--;
+      if (
+        array
+          .concat(displayedJokes)
+          .find(({ id }) => id === response.data.id) === undefined
+      ) {
+        array.push(response.data);
+        tries = 0;
+      } else if (tries >= tryLimit) {
+        break;
+      } else {
+        i--;
+        tries++;
+      }
     }
   }
   return array;
