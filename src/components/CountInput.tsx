@@ -40,13 +40,14 @@ export function CountInput({
     if (searchQuery) {
       getJokesBySearch(searchQuery).then((res) => {
         setJokesToDisplay(res.result.splice(0, jokesToDisplay.length + diff));
+        setIsDisabled(false);
       });
     } else {
       getRandomJokes(diff, jokesToDisplay, selectedCategory).then((res) => {
         setJokesToDisplay(jokesToDisplay.concat(res));
+        setIsDisabled(false);
       });
     }
-    setIsDisabled(false);
   };
 
   const removeJokes = (diff: number) => {
