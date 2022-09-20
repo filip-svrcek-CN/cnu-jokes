@@ -21,7 +21,7 @@ const Col = styled.div`
 `;
 
 export function Controls({ setJokesToDisplay, jokesToDisplay }: ControlsProps) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
