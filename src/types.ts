@@ -46,3 +46,8 @@ export type SearchInputProps = {
   setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
   searchQuery: string;
 };
+
+export type ButtonProps = {
+  text: string;
+  onClick: () => void;
+};

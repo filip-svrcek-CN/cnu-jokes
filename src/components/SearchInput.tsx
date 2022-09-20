@@ -1,6 +1,8 @@
 import styled from "styled-components";
+
 import { getJokesBySearch } from "../api";
 import { SearchInputProps } from "../types";
+import { Button } from "./Button";
 
 const StyledInput = styled.input``;
 export function SearchInput({
@@ -29,7 +31,7 @@ export function SearchInput({
         value={searchQuery}
         onChange={(event) => handleChange(event.target.value)}
       />
-      <button onClick={handleSearch}>Search</button>
+      <Button text="Search" onClick={handleSearch} />
     </div>
   );
 }

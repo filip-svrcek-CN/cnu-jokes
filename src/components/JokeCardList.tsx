@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { JokeCardListProps } from "../types";
 
 const StyledJokeCard = styled.div`

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { getRandomJokes } from "../api";
+import { Button } from "../components/Button";
 import { CategorySelect } from "../components/CategorySelect";
 import { CountInput } from "../components/CountInput";
 import { SearchInput } from "../components/SearchInput";
@@ -16,7 +17,7 @@ const StyledControls = styled.div`
   justify-content: center;
 `;
 const Col = styled.div`
-  width: 33%;
+  width: 50%;
 `;
 
 export function Controls({ setJokesToDisplay, jokesToDisplay }: ControlsProps) {
@@ -26,12 +27,16 @@ export function Controls({ setJokesToDisplay, jokesToDisplay }: ControlsProps) {
 
   useEffect(() => {
     if (selectedCategory !== "") {
-      getRandomJokes(count, jokesToDisplay, selectedCategory).then((res) => {
-        setSearchQuery("");
-        setJokesToDisplay(res);
-      });
+      handleShowRandom();
     }
   }, [selectedCategory]);
+
+  const handleShowRandom = () => {
+    getRandomJokes(count, jokesToDisplay, selectedCategory).then((res) => {
+      setSearchQuery("");
+      setJokesToDisplay(res);
+    });
+  };
 
   return (
     <StyledControls>
@@ -44,8 +49,6 @@ export function Controls({ setJokesToDisplay, jokesToDisplay }: ControlsProps) {
           jokesToDisplay={jokesToDisplay}
           count={count}
         />
-      </Col>
-      <Col>
         <CountInput
           setCount={setCount}
           count={count}
@@ -54,6 +57,7 @@ export function Controls({ setJokesToDisplay, jokesToDisplay }: ControlsProps) {
           selectedCategory={selectedCategory}
           searchQuery={searchQuery}
         />
+        <Button text="Show more random jokes!" onClick={handleShowRandom} />
       </Col>
       <Col>
         <SearchInput

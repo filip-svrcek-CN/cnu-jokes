@@ -4,7 +4,10 @@ import styled from "styled-components";
 import { getJokesBySearch, getRandomJokes } from "../api";
 import { CountInputProps } from "../types";
 
-const StyledInput = styled.input``;
+const StyledInput = styled.input`
+  width: 3rem;
+  margin-left: 1rem;
+`;
 
 export function CountInput({
   setCount,
