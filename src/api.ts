@@ -11,24 +11,33 @@ export const getCategories = async () => {
   return response.data;
 };
 
-export const getRandomJokes = async (count: number, category?: string) => {
+export const getRandomJokes = async (
+  count: number,
+  displayedJokes: FetchedJoke[],
+  category?: string
+) => {
   let array: FetchedJoke[] = [];
   if (category) {
     for (let i = 0; i < count; i++) {
       const response = await api.get(`/jokes/random?category=${category}`);
-      array.push(response.data);
+      array.concat(displayedJokes).find(({ id }) => id === response.data.id) ===
+      undefined
+        ? array.push(response.data)
+        : i--;
     }
   } else {
     for (let i = 0; i < count; i++) {
       const response = await api.get(`/jokes/random`);
-      array.push(response.data);
+      array.concat(displayedJokes).find(({ id }) => id === response.data.id) ===
+      undefined
+        ? array.push(response.data)
+        : i--;
     }
   }
-
   return array;
 };
 
 export const getJokesBySearch = async (query: string) => {
-  const response = await api.get(`/jokes/search?${query}`);
+  const response = await api.get(`/jokes/search?query=${query}`);
   return response.data;
 };

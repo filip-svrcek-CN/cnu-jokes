@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { getRandomJokes } from "../api";
+import { useState } from "react";
 
 import { JokeCardList } from "../components/JokeCardList";
 import { FetchedJoke } from "../types";

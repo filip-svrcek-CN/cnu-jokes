@@ -6,7 +6,10 @@ import { CategorySelectProps } from "../types";
 
 const StyledSelect = styled.select``;
 
-export function CategorySelect({ setSelectedCategory }: CategorySelectProps) {
+export function CategorySelect({
+  selectedCategory,
+  setSelectedCategory,
+}: CategorySelectProps) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -15,16 +18,14 @@ export function CategorySelect({ setSelectedCategory }: CategorySelectProps) {
     });
   }, []);
 
-  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCategory(event.target.value);
+  const handleSelect = (value: string) => {
+    setSelectedCategory(value);
   };
 
   return (
     <StyledSelect
-      name="cars"
-      id="cars"
-      onChange={(event) => handleSelect(event)}
-      defaultValue={""}
+      onChange={(event) => handleSelect(event.target.value)}
+      value={selectedCategory}
     >
       <option value="">All categories</option>
       {categories.map((category, index) => {

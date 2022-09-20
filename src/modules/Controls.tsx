@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+
 import { getRandomJokes } from "../api";
 import { CategorySelect } from "../components/CategorySelect";
 import { CountInput } from "../components/CountInput";
-
+import { SearchInput } from "../components/SearchInput";
 import { ControlsProps } from "../types";
 
 const StyledControls = styled.div`
@@ -19,19 +20,30 @@ const Col = styled.div`
 `;
 
 export function Controls({ setJokesToDisplay, jokesToDisplay }: ControlsProps) {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    getRandomJokes(count, selectedCategory).then((res) =>
-      setJokesToDisplay(res)
-    );
+    if (selectedCategory !== "") {
+      getRandomJokes(count, jokesToDisplay, selectedCategory).then((res) => {
+        setSearchQuery("");
+        setJokesToDisplay(res);
+      });
+    }
   }, [selectedCategory]);
 
   return (
     <StyledControls>
       <Col>
-        <CategorySelect setSelectedCategory={setSelectedCategory} />
+        <CategorySelect
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          setJokesToDisplay={setJokesToDisplay}
+          setSearchQuery={setSearchQuery}
+          jokesToDisplay={jokesToDisplay}
+          count={count}
+        />
       </Col>
       <Col>
         <CountInput
@@ -40,9 +52,18 @@ export function Controls({ setJokesToDisplay, jokesToDisplay }: ControlsProps) {
           setJokesToDisplay={setJokesToDisplay}
           jokesToDisplay={jokesToDisplay}
           selectedCategory={selectedCategory}
+          searchQuery={searchQuery}
         />
       </Col>
-      <Col></Col>
+      <Col>
+        <SearchInput
+          setSearchQuery={setSearchQuery}
+          setJokesToDisplay={setJokesToDisplay}
+          setCount={setCount}
+          setSelectedCategory={setSelectedCategory}
+          searchQuery={searchQuery}
+        />
+      </Col>
     </StyledControls>
   );
 }

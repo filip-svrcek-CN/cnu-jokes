@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { getRandomJokes } from "../api";
+
+import { getJokesBySearch, getRandomJokes } from "../api";
 import { CountInputProps } from "../types";
 
 const StyledInput = styled.input``;
@@ -11,6 +12,7 @@ export function CountInput({
   setJokesToDisplay,
   jokesToDisplay,
   selectedCategory,
+  searchQuery,
 }: CountInputProps) {
   const [isDisabled, setIsDisabled] = useState(false);
   const inputElement = useRef<HTMLInputElement>(null);
@@ -23,23 +25,32 @@ export function CountInput({
     const newCount = parseInt(event.target.value) || 0;
     const diff: number = newCount - count;
     if (diff > 0) {
-      addJokes(diff);
+      addJokes(diff, searchQuery);
     } else {
       removeJokes(diff);
     }
     setCount(newCount);
   };
 
-  const addJokes = async (diff: number) => {
+  const addJokes = (diff: number, searchQuery: string) => {
     setIsDisabled(true);
-    getRandomJokes(diff, selectedCategory).then((res) => {
-      setJokesToDisplay(jokesToDisplay.concat(res));
-      setIsDisabled(false);
-    });
+    if (searchQuery) {
+      getJokesBySearch(searchQuery).then((res) => {
+        setJokesToDisplay(res.result.splice(0, jokesToDisplay.length + diff));
+        setIsDisabled(false);
+      });
+    } else {
+      getRandomJokes(diff, jokesToDisplay, selectedCategory).then((res) => {
+        setJokesToDisplay(jokesToDisplay.concat(res));
+        setIsDisabled(false);
+      });
+    }
   };
 
   const removeJokes = (diff: number) => {
+    setIsDisabled(false);
     setJokesToDisplay(jokesToDisplay.splice(0, jokesToDisplay.length + diff));
+    setIsDisabled(false);
   };
 
   return (

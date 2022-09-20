@@ -22,7 +22,12 @@ export type JokeCardListProps = {
 };
 
 export type CategorySelectProps = {
+  selectedCategory: string;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+  setJokesToDisplay: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  jokesToDisplay: FetchedJoke[];
+  count: number;
 };
 
 export type CountInputProps = {
@@ -31,4 +36,13 @@ export type CountInputProps = {
   setJokesToDisplay: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
   jokesToDisplay: FetchedJoke[];
   selectedCategory: string;
+  searchQuery: string;
+};
+
+export type SearchInputProps = {
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  setJokesToDisplay: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+  searchQuery: string;
 };
