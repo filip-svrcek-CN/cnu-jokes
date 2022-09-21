@@ -42,6 +42,7 @@ export function SearchInput({
         type="text"
         value={searchQuery}
         onChange={(event) => handleChange(event.target.value)}
+        onKeyDown={(event) => (event.key === "Enter" ? handleSearch() : null)}
       />
       <Button text="Search" onClick={handleSearch} />
     </div>
