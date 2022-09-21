@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
-import { getJokesBySearch, getRandomJokes } from "../api";
+import { getRandomJokes } from "../api";
 import { CountInputProps } from "../types";
 
 const StyledInput = styled.input`
@@ -18,6 +18,7 @@ export function CountInput({
   setCount,
   searchQuery,
   setIsLoading,
+  searchResult,
 }: CountInputProps) {
   const [isDisabled, setIsDisabled] = useState(false);
   const inputElement = useRef<HTMLInputElement>(null);
@@ -30,30 +31,24 @@ export function CountInput({
     const newCount = parseInt(event.target.value) || 0;
     const diff: number = newCount - count;
     if (diff > 0) {
-      addJokes(diff, searchQuery);
+      addJokes(diff);
     } else if (jokesToDisplay.length > newCount) {
       removeJokes(diff);
     }
     setCount(newCount);
   };
 
-  const addJokes = (diff: number, searchQuery: string) => {
+  const addJokes = (diff: number) => {
     setIsLoading(true);
     setIsDisabled(true);
-    if (searchQuery) {
-      getJokesBySearch(searchQuery)
-        .then((res) => {
-          setJokesToDisplay(res.result.splice(0, jokesToDisplay.length + diff));
-        })
-        .catch(() => {
-          toast.error("There has been an error fetching the jokes!", {
-            autoClose: false,
-          });
-        })
-        .finally(() => {
-          setIsDisabled(false);
-          setIsLoading(false);
-        });
+    if (searchQuery && searchResult.length === jokesToDisplay.length) {
+      toast.info("There aren't enough jokes for this search.");
+      setIsDisabled(false);
+      setIsLoading(false);
+    } else if (searchQuery) {
+      setJokesToDisplay(searchResult.slice(0, jokesToDisplay.length + diff));
+      setIsDisabled(false);
+      setIsLoading(false);
     } else {
       getRandomJokes(diff, jokesToDisplay, selectedCategory)
         .then((res) => {
@@ -74,7 +69,7 @@ export function CountInput({
   const removeJokes = (diff: number) => {
     setIsLoading(true);
     setIsDisabled(true);
-    setJokesToDisplay(jokesToDisplay.splice(0, jokesToDisplay.length + diff));
+    setJokesToDisplay(jokesToDisplay.slice(0, jokesToDisplay.length + diff));
     setIsDisabled(false);
     setIsLoading(false);
   };

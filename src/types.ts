@@ -36,6 +36,7 @@ export type CountInputProps = {
   setCount: React.Dispatch<React.SetStateAction<number>>;
   searchQuery: string;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  searchResult: FetchedJoke[];
 };
 
 export type SearchInputProps = {
@@ -45,6 +46,7 @@ export type SearchInputProps = {
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setSearchResult: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
 };
 
 export type ButtonProps = {

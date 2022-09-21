@@ -13,6 +13,7 @@ export function SearchInput({
   searchQuery,
   setSearchQuery,
   setIsLoading,
+  setSearchResult,
 }: SearchInputProps) {
   const handleChange = (value: string) => {
     setSearchQuery(value);
@@ -23,6 +24,7 @@ export function SearchInput({
     setSelectedCategory("");
     getJokesBySearch(searchQuery)
       .then((res) => {
+        setSearchResult(res.result);
         setCount(res.total);
         setJokesToDisplay(res.result);
       })

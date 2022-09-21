@@ -7,7 +7,7 @@ import { Button } from "../components/Button";
 import { CategorySelect } from "../components/CategorySelect";
 import { CountInput } from "../components/CountInput";
 import { SearchInput } from "../components/SearchInput";
-import { ControlsProps } from "../types";
+import { ControlsProps, FetchedJoke } from "../types";
 import { Spinner } from "../components/Spinner";
 
 const StyledControls = styled.div`
@@ -39,6 +39,7 @@ export function Controls({
   const [count, setCount] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResult, setSearchResult] = useState<FetchedJoke[]>([]);
 
   useEffect(() => {
     if (selectedCategory !== "") {
@@ -79,6 +80,7 @@ export function Controls({
             setCount={setCount}
             searchQuery={searchQuery}
             setIsLoading={setIsLoading}
+            searchResult={searchResult}
           />
           <Button text="New set of random jokes!" onClick={handleShowRandom} />
         </Col>
@@ -90,6 +92,7 @@ export function Controls({
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             setIsLoading={setIsLoading}
+            setSearchResult={setSearchResult}
           />
         </Col>
       </StyledControls>
