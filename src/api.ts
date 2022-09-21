@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 import { FetchedJoke } from "./types";
 
@@ -30,6 +31,7 @@ export const getRandomJokes = async (
         array.push(response.data);
         tries = 0;
       } else if (tries >= tryLimit) {
+        toast.info("There aren't enough jokes in this category.");
         break;
       } else {
         i--;
@@ -47,6 +49,7 @@ export const getRandomJokes = async (
         array.push(response.data);
         tries = 0;
       } else if (tries >= tryLimit) {
+        toast("There aren't enough jokes in this category.");
         break;
       } else {
         i--;
