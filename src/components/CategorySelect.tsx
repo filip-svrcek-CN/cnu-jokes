@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import { getCategories } from "../api";
@@ -13,9 +14,15 @@ export function CategorySelect({
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    getCategories().then((res) => {
-      setCategories(res);
-    });
+    getCategories()
+      .then((res) => {
+        setCategories(res);
+      })
+      .catch(() => {
+        toast.error("There has been an error fetching the categories!", {
+          autoClose: false,
+        });
+      });
   }, []);
 
   const handleSelect = (value: string) => {

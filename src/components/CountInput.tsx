@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import { getJokesBySearch, getRandomJokes } from "../api";
@@ -10,12 +11,13 @@ const StyledInput = styled.input`
 `;
 
 export function CountInput({
-  setCount,
-  count,
-  setJokesToDisplay,
   jokesToDisplay,
+  setJokesToDisplay,
   selectedCategory,
+  count,
+  setCount,
   searchQuery,
+  setIsLoading,
 }: CountInputProps) {
   const [isDisabled, setIsDisabled] = useState(false);
   const inputElement = useRef<HTMLInputElement>(null);
@@ -36,24 +38,45 @@ export function CountInput({
   };
 
   const addJokes = (diff: number, searchQuery: string) => {
+    setIsLoading(true);
     setIsDisabled(true);
     if (searchQuery) {
-      getJokesBySearch(searchQuery).then((res) => {
-        setJokesToDisplay(res.result.splice(0, jokesToDisplay.length + diff));
-        setIsDisabled(false);
-      });
+      getJokesBySearch(searchQuery)
+        .then((res) => {
+          setJokesToDisplay(res.result.splice(0, jokesToDisplay.length + diff));
+        })
+        .catch(() => {
+          toast.error("There has been an error fetching the jokes!", {
+            autoClose: false,
+          });
+        })
+        .finally(() => {
+          setIsDisabled(false);
+          setIsLoading(false);
+        });
     } else {
-      getRandomJokes(diff, jokesToDisplay, selectedCategory).then((res) => {
-        setJokesToDisplay(jokesToDisplay.concat(res));
-        setIsDisabled(false);
-      });
+      getRandomJokes(diff, jokesToDisplay, selectedCategory)
+        .then((res) => {
+          setJokesToDisplay(jokesToDisplay.concat(res));
+        })
+        .catch(() => {
+          toast.error("There has been an error fetching the jokes!", {
+            autoClose: false,
+          });
+        })
+        .finally(() => {
+          setIsDisabled(false);
+          setIsLoading(false);
+        });
     }
   };
 
   const removeJokes = (diff: number) => {
+    setIsLoading(true);
     setIsDisabled(true);
     setJokesToDisplay(jokesToDisplay.splice(0, jokesToDisplay.length + diff));
     setIsDisabled(false);
+    setIsLoading(false);
   };
 
   return (

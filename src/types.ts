@@ -13,8 +13,10 @@ export type UseStateSetJokes = React.Dispatch<
 >;
 
 export type ControlsProps = {
-  setJokesToDisplay: UseStateSetJokes;
   jokesToDisplay: FetchedJoke[];
+  setJokesToDisplay: UseStateSetJokes;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type JokeCardListProps = {
@@ -24,27 +26,25 @@ export type JokeCardListProps = {
 export type CategorySelectProps = {
   selectedCategory: string;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
-  setJokesToDisplay: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  jokesToDisplay: FetchedJoke[];
-  count: number;
 };
 
 export type CountInputProps = {
-  setCount: React.Dispatch<React.SetStateAction<number>>;
-  count: number;
-  setJokesToDisplay: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
   jokesToDisplay: FetchedJoke[];
+  setJokesToDisplay: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
   selectedCategory: string;
+  count: number;
+  setCount: React.Dispatch<React.SetStateAction<number>>;
   searchQuery: string;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type SearchInputProps = {
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   setJokesToDisplay: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
-  setCount: React.Dispatch<React.SetStateAction<number>>;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+  setCount: React.Dispatch<React.SetStateAction<number>>;
   searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type ButtonProps = {

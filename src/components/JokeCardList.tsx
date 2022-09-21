@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 import { JokeCardListProps } from "../types";
 
+const StyledJokesContainer = styled.div`
+  margin-top: 60px;
+`;
+
 const StyledJokeCard = styled.div`
   margin-top: 20px;
   font-size: 30px;
@@ -10,7 +14,7 @@ const StyledJokeCard = styled.div`
 
 export function JokeCardList({ jokesToDisplay }: JokeCardListProps) {
   return (
-    <div>
+    <StyledJokesContainer>
       {jokesToDisplay &&
         jokesToDisplay.map(({ id, value }, index) => {
           return (
@@ -19,6 +23,6 @@ export function JokeCardList({ jokesToDisplay }: JokeCardListProps) {
             </StyledJokeCard>
           );
         })}
-    </div>
+    </StyledJokesContainer>
   );
 }
