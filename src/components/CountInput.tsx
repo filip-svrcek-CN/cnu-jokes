@@ -50,7 +50,7 @@ export function CountInput({
       setIsDisabled(false);
       setIsLoading(false);
     } else {
-      getRandomJokes(diff, jokesToDisplay, selectedCategory)
+      getRandomJokes(diff, selectedCategory, jokesToDisplay)
         .then((res) => {
           setJokesToDisplay(jokesToDisplay.concat(res));
         })

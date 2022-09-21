@@ -12,7 +12,7 @@ export function PageContent() {
 
   useEffect(() => {
     setIsLoading(true);
-    getRandomJokes(1, jokesToDisplay)
+    getRandomJokes(1)
       .then((res) => {
         setJokesToDisplay(res);
       })

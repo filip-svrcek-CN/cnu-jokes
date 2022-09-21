@@ -14,8 +14,8 @@ export const getCategories = async () => {
 
 export const getRandomJokes = async (
   count: number,
-  displayedJokes: FetchedJoke[],
-  category?: string
+  category?: string,
+  displayedJokes?: FetchedJoke[]
 ) => {
   let array: FetchedJoke[] = [];
   const tryLimit = 10;
@@ -24,6 +24,12 @@ export const getRandomJokes = async (
     for (let i = 0; i < count; i++) {
       const response = await api.get(`/jokes/random?category=${category}`);
       if (
+        !displayedJokes &&
+        array.find(({ id }) => id === response.data.id) === undefined
+      ) {
+        array.push(response.data);
+      } else if (
+        displayedJokes &&
         array
           .concat(displayedJokes)
           .find(({ id }) => id === response.data.id) === undefined
@@ -42,6 +48,12 @@ export const getRandomJokes = async (
     for (let i = 0; i < count; i++) {
       const response = await api.get(`/jokes/random`);
       if (
+        !displayedJokes &&
+        array.find(({ id }) => id === response.data.id) === undefined
+      ) {
+        array.push(response.data);
+      } else if (
+        displayedJokes &&
         array
           .concat(displayedJokes)
           .find(({ id }) => id === response.data.id) === undefined

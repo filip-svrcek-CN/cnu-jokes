@@ -47,9 +47,15 @@ export function Controls({
     }
   }, [selectedCategory]);
 
-  const handleShowRandom = () => {
+  const handleShowRandom = (newSet?: boolean) => {
     setIsLoading(true);
-    getRandomJokes(count, jokesToDisplay, selectedCategory)
+    getRandomJokes
+      .apply(
+        null,
+        newSet === true
+          ? [count, selectedCategory]
+          : [count, selectedCategory, jokesToDisplay]
+      )
       .then((res) => {
         setSearchQuery("");
         setJokesToDisplay(res);
@@ -82,7 +88,10 @@ export function Controls({
             setIsLoading={setIsLoading}
             searchResult={searchResult}
           />
-          <Button text="New set of random jokes!" onClick={handleShowRandom} />
+          <Button
+            text="New set of random jokes!"
+            onClick={() => handleShowRandom(true)}
+          />
         </Col>
         <Col>
           <SearchInput
