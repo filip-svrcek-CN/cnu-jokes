@@ -40,6 +40,7 @@ export function Controls({
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState<FetchedJoke[]>([]);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
     if (selectedCategory !== "") {
@@ -48,6 +49,7 @@ export function Controls({
   }, [selectedCategory]);
 
   const handleShowRandom = (newSet?: boolean) => {
+    setIsDisabled(true);
     setIsLoading(true);
     getRandomJokes
       .apply(
@@ -66,6 +68,7 @@ export function Controls({
         });
       })
       .finally(() => {
+        setIsDisabled(false);
         setIsLoading(false);
       });
   };
@@ -77,6 +80,7 @@ export function Controls({
           <CategorySelect
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
+            isDisabled={isDisabled}
           />
           <CountInput
             jokesToDisplay={jokesToDisplay}
@@ -87,10 +91,13 @@ export function Controls({
             searchQuery={searchQuery}
             setIsLoading={setIsLoading}
             searchResult={searchResult}
+            isDisabled={isDisabled}
+            setIsDisabled={setIsDisabled}
           />
           <Button
             text="New set of random jokes!"
             onClick={() => handleShowRandom(true)}
+            isDisabled={isDisabled}
           />
         </Col>
         <Col>
@@ -102,6 +109,8 @@ export function Controls({
             setSearchQuery={setSearchQuery}
             setIsLoading={setIsLoading}
             setSearchResult={setSearchResult}
+            isDisabled={isDisabled}
+            setIsDisabled={setIsDisabled}
           />
         </Col>
       </StyledControls>

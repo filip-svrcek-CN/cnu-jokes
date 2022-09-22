@@ -14,12 +14,15 @@ export function SearchInput({
   setSearchQuery,
   setIsLoading,
   setSearchResult,
+  isDisabled,
+  setIsDisabled,
 }: SearchInputProps) {
   const handleChange = (value: string) => {
     setSearchQuery(value);
   };
 
   const handleSearch = () => {
+    setIsDisabled(true);
     setIsLoading(true);
     setSelectedCategory("");
     getJokesBySearch(searchQuery)
@@ -34,6 +37,7 @@ export function SearchInput({
         });
       })
       .finally(() => {
+        setIsDisabled(false);
         setIsLoading(false);
       });
   };
@@ -45,8 +49,9 @@ export function SearchInput({
         value={searchQuery}
         onChange={(event) => handleChange(event.target.value)}
         onKeyDown={(event) => (event.key === "Enter" ? handleSearch() : null)}
+        disabled={isDisabled}
       />
-      <Button text="Search" onClick={handleSearch} />
+      <Button text="Search" onClick={handleSearch} isDisabled={isDisabled} />
     </div>
   );
 }

@@ -26,6 +26,7 @@ export type JokeCardListProps = {
 export type CategorySelectProps = {
   selectedCategory: string;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+  isDisabled: boolean;
 };
 
 export type CountInputProps = {
@@ -37,6 +38,8 @@ export type CountInputProps = {
   searchQuery: string;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   searchResult: FetchedJoke[];
+  isDisabled: boolean;
+  setIsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type SearchInputProps = {
@@ -47,9 +50,12 @@ export type SearchInputProps = {
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setSearchResult: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
+  isDisabled: boolean;
+  setIsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type ButtonProps = {
   text: string;
   onClick: () => void;
+  isDisabled: boolean;
 };

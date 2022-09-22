@@ -10,6 +10,7 @@ const StyledSelect = styled.select``;
 export function CategorySelect({
   selectedCategory,
   setSelectedCategory,
+  isDisabled,
 }: CategorySelectProps) {
   const [categories, setCategories] = useState([]);
 
@@ -33,6 +34,7 @@ export function CategorySelect({
     <StyledSelect
       onChange={(event) => handleSelect(event.target.value)}
       value={selectedCategory}
+      disabled={isDisabled}
     >
       <option value="">All categories</option>
       {categories.map((category, index) => {

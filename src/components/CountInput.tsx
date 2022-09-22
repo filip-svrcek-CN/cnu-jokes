@@ -19,8 +19,9 @@ export function CountInput({
   searchQuery,
   setIsLoading,
   searchResult,
+  isDisabled,
+  setIsDisabled,
 }: CountInputProps) {
-  const [isDisabled, setIsDisabled] = useState(false);
   const inputElement = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
