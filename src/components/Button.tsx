@@ -1,8 +1,16 @@
 import styled from "styled-components";
 
+import { borderRadius, cnRed, ControlsElementStyle } from "../styles";
 import { ButtonProps } from "../types";
 
-const StyledButton = styled.button``;
+const StyledButton = styled.button`
+  ${ControlsElementStyle};
+  border-radius: 0 ${borderRadius} ${borderRadius} 0;
+  cursor: pointer;
+  &:hover {
+    background-color: ${cnRed};
+  }
+`;
 
 export function Button({ text, onClick, isDisabled }: ButtonProps) {
   return (

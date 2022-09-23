@@ -10,7 +10,7 @@ const StyledHorizontalLine = styled.hr`
 `;
 
 const StyledImg = styled.img`
-  height: 6rem;
+  height: 4rem;
 `;
 
 export function Header() {

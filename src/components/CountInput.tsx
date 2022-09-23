@@ -1,12 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import { getRandomJokes } from "../api";
+import { borderRadius, ControlsElementStyle, FocusInputStyle } from "../styles";
 import { CountInputProps } from "../types";
 
 const StyledInput = styled.input`
+  ${ControlsElementStyle};
+  border-radius: ${borderRadius};
   width: 3rem;
+  ${FocusInputStyle};
 `;
 
 export function CountInput({

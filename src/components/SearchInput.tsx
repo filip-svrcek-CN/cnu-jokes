@@ -2,10 +2,16 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import { getJokesBySearch } from "../api";
+import { borderRadius, ControlsElementStyle, FocusInputStyle } from "../styles";
 import { SearchInputProps } from "../types";
 import { Button } from "./Button";
 
-const StyledInput = styled.input``;
+const StyledInput = styled.input`
+  ${ControlsElementStyle};
+  border-radius: ${borderRadius} 0 0 ${borderRadius};
+  ${FocusInputStyle};
+`;
+
 export function SearchInput({
   setJokesToDisplay,
   setSelectedCategory,

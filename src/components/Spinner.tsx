@@ -1,5 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
+import { cnRed } from "../styles";
+
 const spin = keyframes`
 0% {
     transform: rotate(0deg);
@@ -10,7 +12,7 @@ const spin = keyframes`
 
 const StyledSpinner = styled.div`
   border: 16px solid #f3f3f3;
-  border-top: 16px solid #ed1848;
+  border-top: 16px solid ${cnRed};
   border-radius: 50%;
   width: 0.5rem;
   height: 0.5rem;

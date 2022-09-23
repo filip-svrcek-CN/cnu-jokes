@@ -5,9 +5,12 @@ import { JokeCardListProps } from "../types";
 const StyledJokesContainer = styled.div``;
 
 const StyledJokeCard = styled.div`
-  margin-top: 20px;
-  font-size: 30px;
+  font-size: 1.5rem;
   color: white;
+  font-family: Helvetica;
+  &:not(:first-of-type) {
+    margin-top: 2rem;
+  }
 `;
 
 export function JokeCardList({ jokesToDisplay }: JokeCardListProps) {

@@ -9,25 +9,24 @@ import { CountInput } from "../components/CountInput";
 import { SearchInput } from "../components/SearchInput";
 import { ControlsProps, FetchedJoke } from "../types";
 import { Spinner } from "../components/Spinner";
-
-const breakPoint = 480;
+import { breakPoint } from "../styles";
 
 const StyledControls = styled.div`
   height: 100%;
-  padding: 0;
-  margin: 0;
+  margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  @media (max-width: ${breakPoint}px) {
+  @media (max-width: ${breakPoint}) {
     flex-direction: column;
     align-items: center;
     row-gap: 1rem;
   }
 `;
 const FlexItem = styled.div`
+  white-space: nowrap;
   width: 40%;
-  @media (max-width: ${breakPoint}px) {
+  @media (max-width: ${breakPoint}) {
     width: 100%;
   }
 `;
@@ -39,7 +38,7 @@ const FlexItemCounter = styled.div`
 const SpinnerContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   height: 50px;
 `;
 
