@@ -6,6 +6,7 @@ import { ButtonProps } from "../types";
 const StyledButton = styled.button`
   ${ControlsElementStyle};
   border-radius: 0 ${borderRadius} ${borderRadius} 0;
+  border-style: solid solid solid none;
   cursor: pointer;
   &:hover {
     background-color: ${cnRed};
