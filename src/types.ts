@@ -38,6 +38,7 @@ export type CountInputProps = {
   searchQuery: string;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   searchResult: FetchedJoke[];
+  isSearchActive: boolean;
   isDisabled: boolean;
   setIsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -50,6 +51,7 @@ export type SearchInputProps = {
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setSearchResult: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
+  setIsSearchActive: React.Dispatch<React.SetStateAction<boolean>>;
   isDisabled: boolean;
   setIsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
 };

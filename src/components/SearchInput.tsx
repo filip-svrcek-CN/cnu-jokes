@@ -20,6 +20,7 @@ export function SearchInput({
   setSearchQuery,
   setIsLoading,
   setSearchResult,
+  setIsSearchActive,
   isDisabled,
   setIsDisabled,
 }: SearchInputProps) {
@@ -36,9 +37,10 @@ export function SearchInput({
     setSelectedCategory("");
     getJokesBySearch(searchQuery)
       .then((res) => {
+        setIsSearchActive(true);
         setSearchResult(res.result);
-        setCount(res.total);
-        setJokesToDisplay(res.result);
+        setJokesToDisplay(res.result.slice(0, 25));
+        res.total > 25 ? setCount(25) : setCount(res.total);
       })
       .catch(() => {
         toast.error("There has been an error fetching the jokes!", {

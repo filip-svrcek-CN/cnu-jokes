@@ -18,55 +18,32 @@ export const getRandomJokes = async (
   displayedJokes?: FetchedJoke[]
 ) => {
   let array: FetchedJoke[] = [];
-  const tryLimit = 10;
+  const tryLimit = 30;
   let tries = 0;
-  if (category) {
-    for (let i = 0; i < count; i++) {
-      const response = await api.get(`/jokes/random?category=${category}`);
-      if (
-        !displayedJokes &&
-        array.find(({ id }) => id === response.data.id) === undefined
-      ) {
-        array.push(response.data);
-      } else if (
-        displayedJokes &&
-        array
-          .concat(displayedJokes)
-          .find(({ id }) => id === response.data.id) === undefined
-      ) {
-        array.push(response.data);
-        tries = 0;
-      } else if (tries >= tryLimit) {
-        toast.info("There might not be enough jokes in this category.");
-        break;
-      } else {
-        i--;
-        tries++;
-      }
-    }
-  } else {
-    for (let i = 0; i < count; i++) {
-      const response = await api.get(`/jokes/random`);
-      if (
-        !displayedJokes &&
-        array.find(({ id }) => id === response.data.id) === undefined
-      ) {
-        array.push(response.data);
-      } else if (
-        displayedJokes &&
-        array
-          .concat(displayedJokes)
-          .find(({ id }) => id === response.data.id) === undefined
-      ) {
-        array.push(response.data);
-        tries = 0;
-      } else if (tries >= tryLimit) {
-        toast.info("There might not be enough jokes in this category.");
-        break;
-      } else {
-        i--;
-        tries++;
-      }
+
+  const url = category ? `/jokes/random?category=${category}` : `/jokes/random`;
+
+  for (let i = 0; i < count; i++) {
+    const response = await api.get(url);
+
+    if (
+      !displayedJokes &&
+      array.find(({ id }) => id === response.data.id) === undefined
+    ) {
+      array.push(response.data);
+    } else if (
+      displayedJokes &&
+      array.concat(displayedJokes).find(({ id }) => id === response.data.id) ===
+        undefined
+    ) {
+      array.push(response.data);
+      tries = 0;
+    } else if (tries >= tryLimit) {
+      toast.info("There might not be enough unique jokes in this category.");
+      break;
+    } else {
+      i--;
+      tries++;
     }
   }
   return array;

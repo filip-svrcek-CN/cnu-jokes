@@ -2,7 +2,7 @@ import { css } from "styled-components";
 
 export const breakPoint = "770px";
 export const cnRed = "#ed1848";
-export const inputGray = "field";
+export const inputGray = "#3b3b3b";
 export const borderRadius = "10px";
 
 export const ControlsElementStyle = css`

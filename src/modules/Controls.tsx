@@ -42,6 +42,10 @@ const SpinnerContainer = styled.div`
   height: 50px;
 `;
 
+const StyledSearchTotalText = styled.span`
+  font-family: Tahoma;
+`;
+
 export function Controls({
   jokesToDisplay,
   setJokesToDisplay,
@@ -52,6 +56,7 @@ export function Controls({
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState<FetchedJoke[]>([]);
+  const [isSearchActive, setIsSearchActive] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
@@ -71,7 +76,6 @@ export function Controls({
           : [count, selectedCategory, jokesToDisplay]
       )
       .then((res) => {
-        setSearchQuery("");
         setJokesToDisplay(res);
       })
       .catch(() => {
@@ -80,6 +84,8 @@ export function Controls({
         });
       })
       .finally(() => {
+        setSearchQuery("");
+        setIsSearchActive(false);
         setIsDisabled(false);
         setIsLoading(false);
       });
@@ -111,6 +117,7 @@ export function Controls({
             searchQuery={searchQuery}
             setIsLoading={setIsLoading}
             searchResult={searchResult}
+            isSearchActive={isSearchActive}
             isDisabled={isDisabled}
             setIsDisabled={setIsDisabled}
           />
@@ -124,12 +131,21 @@ export function Controls({
             setSearchQuery={setSearchQuery}
             setIsLoading={setIsLoading}
             setSearchResult={setSearchResult}
+            setIsSearchActive={setIsSearchActive}
             isDisabled={isDisabled}
             setIsDisabled={setIsDisabled}
           />
         </FlexItem>
       </StyledControls>
-      <SpinnerContainer>{isLoading && <Spinner />}</SpinnerContainer>
+      <SpinnerContainer>
+        {isLoading ? (
+          <Spinner />
+        ) : isSearchActive ? (
+          <StyledSearchTotalText>
+            of {searchResult.length} search results
+          </StyledSearchTotalText>
+        ) : null}
+      </SpinnerContainer>
     </div>
   );
 }

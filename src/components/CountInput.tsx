@@ -22,6 +22,7 @@ export function CountInput({
   searchQuery,
   setIsLoading,
   searchResult,
+  isSearchActive,
   isDisabled,
   setIsDisabled,
 }: CountInputProps) {
@@ -35,17 +36,17 @@ export function CountInput({
     const newCount = parseInt(event.target.value) || 0;
     const diff: number = newCount - count;
     if (diff > 0) {
-      addJokes(diff);
+      addJokes(diff, newCount);
     } else if (jokesToDisplay.length > newCount) {
       removeJokes(diff);
     }
     setCount(newCount);
   };
 
-  const addJokes = (diff: number) => {
+  const addJokes = (diff: number, newCount: number) => {
     setIsLoading(true);
     setIsDisabled(true);
-    if (searchQuery && searchResult.length === jokesToDisplay.length) {
+    if (searchQuery && searchResult.length < newCount) {
       toast.info("There aren't enough jokes for this search.");
       setIsDisabled(false);
       setIsLoading(false);
@@ -84,6 +85,7 @@ export function CountInput({
       type="number"
       value={count}
       min="0"
+      max={isSearchActive ? searchResult.length : undefined}
       disabled={isDisabled}
       ref={inputElement}
       onChange={(event) => {
