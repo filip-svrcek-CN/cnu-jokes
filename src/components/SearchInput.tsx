@@ -22,6 +22,9 @@ export function SearchInput({
   };
 
   const handleSearch = () => {
+    if (searchQuery.length < 3) {
+      return toast.info("Search needs at least 3 characters");
+    }
     setIsDisabled(true);
     setIsLoading(true);
     setSelectedCategory("");
