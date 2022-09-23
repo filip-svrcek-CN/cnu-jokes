@@ -10,6 +10,7 @@ const StyledSelect = styled.select`
   ${ControlsElementStyle};
   border-radius: ${borderRadius} 0 0 ${borderRadius};
   cursor: pointer;
+  padding: 0.25rem;
   ${FocusInputStyle};
 `;
 
