@@ -2,9 +2,7 @@ import styled from "styled-components";
 
 import { JokeCardListProps } from "../types";
 
-const StyledJokesContainer = styled.div`
-  margin-top: 60px;
-`;
+const StyledJokesContainer = styled.div``;
 
 const StyledJokeCard = styled.div`
   margin-top: 20px;

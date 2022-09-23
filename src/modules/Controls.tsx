@@ -10,6 +10,8 @@ import { SearchInput } from "../components/SearchInput";
 import { ControlsProps, FetchedJoke } from "../types";
 import { Spinner } from "../components/Spinner";
 
+const breakPoint = 480;
+
 const StyledControls = styled.div`
   height: 100%;
   padding: 0;
@@ -17,17 +19,28 @@ const StyledControls = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: ${breakPoint}px) {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+  }
 `;
-const Col = styled.div`
-  width: 50%;
+const FlexItem = styled.div`
+  width: 40%;
+  @media (max-width: ${breakPoint}px) {
+    width: 100%;
+  }
 `;
+
+const FlexItemCounter = styled.div`
+  margin: 0 2rem 0 2rem;
+`;
+
 const SpinnerContainer = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 50px;
 `;
 
 export function Controls({
@@ -76,12 +89,20 @@ export function Controls({
   return (
     <div>
       <StyledControls>
-        <Col>
+        <FlexItem>
           <CategorySelect
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
             isDisabled={isDisabled}
           />
+
+          <Button
+            text="New random jokes!"
+            onClick={() => handleShowRandom(true)}
+            isDisabled={isDisabled}
+          />
+        </FlexItem>
+        <FlexItemCounter>
           <CountInput
             jokesToDisplay={jokesToDisplay}
             setJokesToDisplay={setJokesToDisplay}
@@ -94,13 +115,8 @@ export function Controls({
             isDisabled={isDisabled}
             setIsDisabled={setIsDisabled}
           />
-          <Button
-            text="New set of random jokes!"
-            onClick={() => handleShowRandom(true)}
-            isDisabled={isDisabled}
-          />
-        </Col>
-        <Col>
+        </FlexItemCounter>
+        <FlexItem>
           <SearchInput
             setJokesToDisplay={setJokesToDisplay}
             setSelectedCategory={setSelectedCategory}
@@ -112,7 +128,7 @@ export function Controls({
             isDisabled={isDisabled}
             setIsDisabled={setIsDisabled}
           />
-        </Col>
+        </FlexItem>
       </StyledControls>
       <SpinnerContainer>{isLoading && <Spinner />}</SpinnerContainer>
     </div>

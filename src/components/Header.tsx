@@ -2,11 +2,11 @@ import styled from "styled-components";
 import cnImage from "../assets/cn.png";
 
 const StyledHeader = styled.header`
-  font-size: 6rem;
+  font-size: 4rem;
 `;
 
 const StyledHorizontalLine = styled.hr`
-  margin: 0px 0px 3rem 0px;
+  margin: 0px 0px 0.5rem 0px;
 `;
 
 const StyledImg = styled.img`
