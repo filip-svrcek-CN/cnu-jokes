@@ -1,6 +1,8 @@
 ##CNU Jokes
 
-How to run the dev:
+React App that displays terrible Chuck Norris jokes from an open CN API.
 
-yarn install
-yarn dev
+_How to run the dev:_
+
+-yarn install
+-yarn dev
