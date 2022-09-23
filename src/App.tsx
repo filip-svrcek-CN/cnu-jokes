@@ -1,13 +1,21 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import styled from "styled-components";
 
-import "./App.css";
 import { Header } from "./components/Header";
 import { PageContent } from "./modules/PageContent";
 
+const StyledApp = styled.div`
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  text-align: center;
+`;
+
 function App() {
   return (
-    <div>
+    <StyledApp>
       <Header />
       <PageContent />
       <ToastContainer
@@ -20,7 +28,7 @@ function App() {
         pauseOnFocusLoss
         pauseOnHover
       />
-    </div>
+    </StyledApp>
   );
 }
 
