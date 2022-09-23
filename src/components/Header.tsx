@@ -3,6 +3,7 @@ import cnImage from "../assets/cn.png";
 
 const StyledHeader = styled.header`
   font-size: 4rem;
+  font-family: Bangers, sans-serif;
 `;
 
 const StyledHorizontalLine = styled.hr`

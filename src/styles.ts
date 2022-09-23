@@ -6,7 +6,6 @@ export const inputGray = "#3b3b3b";
 export const borderRadius = "10px";
 
 export const ControlsElementStyle = css`
-  font-family: Tahoma;
   font-size: 1rem;
   border: solid;
   background-color: ${inputGray};

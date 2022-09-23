@@ -42,10 +42,6 @@ const SpinnerContainer = styled.div`
   height: 50px;
 `;
 
-const StyledSearchTotalText = styled.span`
-  font-family: Tahoma;
-`;
-
 export function Controls({
   jokesToDisplay,
   setJokesToDisplay,
@@ -141,9 +137,7 @@ export function Controls({
         {isLoading ? (
           <Spinner />
         ) : isSearchActive ? (
-          <StyledSearchTotalText>
-            of {searchResult.length} search results
-          </StyledSearchTotalText>
+          <span>{searchResult.length} search results</span>
         ) : null}
       </SpinnerContainer>
     </div>
