@@ -23,15 +23,13 @@ export function CountInput({
   searchQuery,
   searchResult,
   isSearchActive,
-  isDisabled,
-  setIsDisabled,
 }: CountInputProps) {
   const inputElement = useRef<HTMLInputElement>(null);
-  const { setIsLoading } = useContext(LoadingStateContext);
+  const { isLoading, setIsLoading } = useContext(LoadingStateContext);
 
   useEffect(() => {
     inputElement.current?.focus();
-  }, [isDisabled]);
+  }, [isLoading]);
 
   const handleCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCount = parseInt(event.target.value) || 0;
@@ -46,14 +44,11 @@ export function CountInput({
 
   const addJokes = (diff: number, newCount: number) => {
     setIsLoading(true);
-    setIsDisabled(true);
     if (searchQuery && searchResult.length < newCount) {
       toast.info("There aren't enough jokes for this search.");
-      setIsDisabled(false);
       setIsLoading(false);
     } else if (searchQuery) {
       setJokesToDisplay(searchResult.slice(0, jokesToDisplay.length + diff));
-      setIsDisabled(false);
       setIsLoading(false);
     } else {
       getRandomJokes(diff, selectedCategory, jokesToDisplay)
@@ -66,7 +61,6 @@ export function CountInput({
           });
         })
         .finally(() => {
-          setIsDisabled(false);
           setIsLoading(false);
         });
     }
@@ -74,9 +68,7 @@ export function CountInput({
 
   const removeJokes = (diff: number) => {
     setIsLoading(true);
-    setIsDisabled(true);
     setJokesToDisplay(jokesToDisplay.slice(0, jokesToDisplay.length + diff));
-    setIsDisabled(false);
     setIsLoading(false);
   };
 
@@ -87,7 +79,7 @@ export function CountInput({
       value={count}
       min="0"
       max={isSearchActive ? searchResult.length : undefined}
-      disabled={isDisabled}
+      disabled={isLoading}
       ref={inputElement}
       onChange={(event) => {
         handleCountChange(event);

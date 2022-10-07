@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import styled from "styled-components";
 
 import { borderRadius, cnRed, ControlsElementStyle } from "../styles";
 import { ButtonProps } from "../types";
+import { LoadingStateContext } from "../utils/LoadingContext";
 
 const StyledButton = styled.button`
   ${ControlsElementStyle};
@@ -13,9 +15,11 @@ const StyledButton = styled.button`
   }
 `;
 
-export function Button({ text, onClick, isDisabled }: ButtonProps) {
+export function Button({ text, onClick }: ButtonProps) {
+  const { isLoading } = useContext(LoadingStateContext);
+
   return (
-    <StyledButton onClick={onClick} disabled={isDisabled}>
+    <StyledButton onClick={onClick} disabled={isLoading}>
       {text}
     </StyledButton>
   );

@@ -49,7 +49,6 @@ export function Controls({ jokesToDisplay, setJokesToDisplay }: ControlsProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState<FetchedJoke[]>([]);
   const [isSearchActive, setIsSearchActive] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
   const { isLoading, setIsLoading } = useContext(LoadingStateContext);
 
   useEffect(() => {
@@ -59,7 +58,6 @@ export function Controls({ jokesToDisplay, setJokesToDisplay }: ControlsProps) {
   }, [selectedCategory]);
 
   const handleShowRandom = (newSet?: boolean) => {
-    setIsDisabled(true);
     setIsLoading(true);
     getRandomJokes
       .apply(
@@ -79,7 +77,6 @@ export function Controls({ jokesToDisplay, setJokesToDisplay }: ControlsProps) {
       .finally(() => {
         setSearchQuery("");
         setIsSearchActive(false);
-        setIsDisabled(false);
         setIsLoading(false);
       });
   };
@@ -91,13 +88,11 @@ export function Controls({ jokesToDisplay, setJokesToDisplay }: ControlsProps) {
           <CategorySelect
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
-            isDisabled={isDisabled}
           />
 
           <Button
             text="New random jokes!"
             onClick={() => handleShowRandom(true)}
-            isDisabled={isDisabled}
           />
         </FlexItem>
         <FlexItemCounter>
@@ -108,11 +103,8 @@ export function Controls({ jokesToDisplay, setJokesToDisplay }: ControlsProps) {
             count={count}
             setCount={setCount}
             searchQuery={searchQuery}
-            // setIsLoading={setIsLoading}
             searchResult={searchResult}
             isSearchActive={isSearchActive}
-            isDisabled={isDisabled}
-            setIsDisabled={setIsDisabled}
           />
         </FlexItemCounter>
         <FlexItem>
@@ -122,11 +114,8 @@ export function Controls({ jokesToDisplay, setJokesToDisplay }: ControlsProps) {
             setCount={setCount}
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
-            // setIsLoading={setIsLoading}
             setSearchResult={setSearchResult}
             setIsSearchActive={setIsSearchActive}
-            isDisabled={isDisabled}
-            setIsDisabled={setIsDisabled}
           />
         </FlexItem>
       </StyledControls>

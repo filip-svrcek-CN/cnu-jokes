@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import { getCategories } from "../api";
 import { borderRadius, ControlsElementStyle, FocusInputStyle } from "../styles";
 import { CategorySelectProps } from "../types";
+import { LoadingStateContext } from "../utils/LoadingContext";
 
 const StyledSelect = styled.select`
   ${ControlsElementStyle};
@@ -17,9 +18,9 @@ const StyledSelect = styled.select`
 export function CategorySelect({
   selectedCategory,
   setSelectedCategory,
-  isDisabled,
 }: CategorySelectProps) {
   const [categories, setCategories] = useState([]);
+  const { isLoading } = useContext(LoadingStateContext);
 
   useEffect(() => {
     getCategories()
@@ -41,7 +42,7 @@ export function CategorySelect({
     <StyledSelect
       onChange={(event) => handleSelect(event.target.value)}
       value={selectedCategory}
-      disabled={isDisabled}
+      disabled={isLoading}
     >
       <option value="">All categories</option>
       {categories.map((category, index) => {
