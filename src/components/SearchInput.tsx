@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { getJokesBySearch } from "../api";
 import { borderRadius, ControlsElementStyle, FocusInputStyle } from "../styles";
 import { SearchInputProps } from "../types";
-import { LoadingStateContext } from "../utils/LoadingContext";
+import { GlobalStatesContext } from "../utils/GlobalStatesContext";
 import { Button } from "./Button";
 
 const StyledInput = styled.input`
@@ -15,7 +15,6 @@ const StyledInput = styled.input`
 `;
 
 export function SearchInput({
-  setJokesToDisplay,
   setSelectedCategory,
   setCount,
   searchQuery,
@@ -23,7 +22,8 @@ export function SearchInput({
   setSearchResult,
   setIsSearchActive,
 }: SearchInputProps) {
-  const { isLoading, setIsLoading } = useContext(LoadingStateContext);
+  const { isLoading, setIsLoading, setJokesToDisplay } =
+    useContext(GlobalStatesContext);
 
   const handleChange = (value: string) => {
     setSearchQuery(value);

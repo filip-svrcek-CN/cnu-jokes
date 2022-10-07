@@ -1,6 +1,7 @@
+import { useContext } from "react";
 import styled from "styled-components";
 
-import { JokeCardListProps } from "../types";
+import { GlobalStatesContext } from "../utils/GlobalStatesContext";
 
 const StyledJokesContainer = styled.div``;
 
@@ -13,11 +14,14 @@ const StyledJokeCard = styled.div`
   }
 `;
 
-export function JokeCardList({ jokesToDisplay }: JokeCardListProps) {
+type Joke = { id: string; value: string };
+
+export function JokeCardList() {
+  const { jokesToDisplay } = useContext(GlobalStatesContext);
   return (
     <StyledJokesContainer>
       {jokesToDisplay &&
-        jokesToDisplay.map(({ id, value }, index) => {
+        jokesToDisplay.map(({ id, value }: Joke, index: number) => {
           return (
             <StyledJokeCard key={id}>
               #{index + 1} {value}

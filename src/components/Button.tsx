@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { borderRadius, cnRed, ControlsElementStyle } from "../styles";
 import { ButtonProps } from "../types";
-import { LoadingStateContext } from "../utils/LoadingContext";
+import { GlobalStatesContext } from "../utils/GlobalStatesContext";
 
 const StyledButton = styled.button`
   ${ControlsElementStyle};
@@ -16,7 +16,7 @@ const StyledButton = styled.button`
 `;
 
 export function Button({ text, onClick }: ButtonProps) {
-  const { isLoading } = useContext(LoadingStateContext);
+  const { isLoading } = useContext(GlobalStatesContext);
 
   return (
     <StyledButton onClick={onClick} disabled={isLoading}>

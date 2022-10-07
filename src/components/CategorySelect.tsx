@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { getCategories } from "../api";
 import { borderRadius, ControlsElementStyle, FocusInputStyle } from "../styles";
 import { CategorySelectProps } from "../types";
-import { LoadingStateContext } from "../utils/LoadingContext";
+import { GlobalStatesContext } from "../utils/GlobalStatesContext";
 
 const StyledSelect = styled.select`
   ${ControlsElementStyle};
@@ -20,7 +20,7 @@ export function CategorySelect({
   setSelectedCategory,
 }: CategorySelectProps) {
   const [categories, setCategories] = useState([]);
-  const { isLoading } = useContext(LoadingStateContext);
+  const { isLoading } = useContext(GlobalStatesContext);
 
   useEffect(() => {
     getCategories()

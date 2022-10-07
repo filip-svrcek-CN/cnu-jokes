@@ -7,10 +7,10 @@ import { Button } from "../components/Button";
 import { CategorySelect } from "../components/CategorySelect";
 import { CountInput } from "../components/CountInput";
 import { SearchInput } from "../components/SearchInput";
-import { ControlsProps, FetchedJoke } from "../types";
+import { FetchedJoke } from "../types";
 import { Spinner } from "../components/Spinner";
 import { breakPoint } from "../styles";
-import { LoadingStateContext } from "../utils/LoadingContext";
+import { GlobalStatesContext } from "../utils/GlobalStatesContext";
 
 const StyledControls = styled.div`
   height: 100%;
@@ -43,13 +43,14 @@ const SpinnerContainer = styled.div`
   height: 50px;
 `;
 
-export function Controls({ jokesToDisplay, setJokesToDisplay }: ControlsProps) {
+export function Controls() {
   const [count, setCount] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState<FetchedJoke[]>([]);
   const [isSearchActive, setIsSearchActive] = useState(false);
-  const { isLoading, setIsLoading } = useContext(LoadingStateContext);
+  const { isLoading, setIsLoading, jokesToDisplay, setJokesToDisplay } =
+    useContext(GlobalStatesContext);
 
   useEffect(() => {
     if (selectedCategory !== "") {
@@ -97,8 +98,6 @@ export function Controls({ jokesToDisplay, setJokesToDisplay }: ControlsProps) {
         </FlexItem>
         <FlexItemCounter>
           <CountInput
-            jokesToDisplay={jokesToDisplay}
-            setJokesToDisplay={setJokesToDisplay}
             selectedCategory={selectedCategory}
             count={count}
             setCount={setCount}
@@ -109,7 +108,6 @@ export function Controls({ jokesToDisplay, setJokesToDisplay }: ControlsProps) {
         </FlexItemCounter>
         <FlexItem>
           <SearchInput
-            setJokesToDisplay={setJokesToDisplay}
             setSelectedCategory={setSelectedCategory}
             setCount={setCount}
             searchQuery={searchQuery}

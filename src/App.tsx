@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { Header } from "./components/Header";
 import { PageContent } from "./modules/PageContent";
-import { LoadingStateProvider } from "./utils/LoadingContext";
+import { GlobalStatesContextProvider } from "./utils/GlobalStatesContext";
 
 const StyledApp = styled.div`
   max-width: 1280px;
@@ -16,7 +16,7 @@ const StyledApp = styled.div`
 
 function App() {
   return (
-    <LoadingStateProvider>
+    <GlobalStatesContextProvider>
       <StyledApp>
         <Header />
         <PageContent />
@@ -31,7 +31,7 @@ function App() {
           pauseOnHover
         />
       </StyledApp>
-    </LoadingStateProvider>
+    </GlobalStatesContextProvider>
   );
 }
 

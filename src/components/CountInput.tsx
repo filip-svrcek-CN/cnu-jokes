@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { getRandomJokes } from "../api";
 import { borderRadius, ControlsElementStyle, FocusInputStyle } from "../styles";
 import { CountInputProps } from "../types";
-import { LoadingStateContext } from "../utils/LoadingContext";
+import { GlobalStatesContext } from "../utils/GlobalStatesContext";
 
 const StyledInput = styled.input`
   ${ControlsElementStyle};
@@ -15,8 +15,6 @@ const StyledInput = styled.input`
 `;
 
 export function CountInput({
-  jokesToDisplay,
-  setJokesToDisplay,
   selectedCategory,
   count,
   setCount,
@@ -25,7 +23,8 @@ export function CountInput({
   isSearchActive,
 }: CountInputProps) {
   const inputElement = useRef<HTMLInputElement>(null);
-  const { isLoading, setIsLoading } = useContext(LoadingStateContext);
+  const { isLoading, setIsLoading, jokesToDisplay, setJokesToDisplay } =
+    useContext(GlobalStatesContext);
 
   useEffect(() => {
     inputElement.current?.focus();
