@@ -15,8 +15,6 @@ export type UseStateSetJokes = React.Dispatch<
 export type ControlsProps = {
   jokesToDisplay: FetchedJoke[];
   setJokesToDisplay: UseStateSetJokes;
-  isLoading: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type JokeCardListProps = {
@@ -36,7 +34,6 @@ export type CountInputProps = {
   count: number;
   setCount: React.Dispatch<React.SetStateAction<number>>;
   searchQuery: string;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   searchResult: FetchedJoke[];
   isSearchActive: boolean;
   isDisabled: boolean;
@@ -49,7 +46,6 @@ export type SearchInputProps = {
   setCount: React.Dispatch<React.SetStateAction<number>>;
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setSearchResult: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
   setIsSearchActive: React.Dispatch<React.SetStateAction<boolean>>;
   isDisabled: boolean;

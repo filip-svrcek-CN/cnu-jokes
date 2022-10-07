@@ -1,9 +1,11 @@
+import { useContext } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import { getJokesBySearch } from "../api";
 import { borderRadius, ControlsElementStyle, FocusInputStyle } from "../styles";
 import { SearchInputProps } from "../types";
+import { LoadingStateContext } from "../utils/LoadingContext";
 import { Button } from "./Button";
 
 const StyledInput = styled.input`
@@ -18,12 +20,13 @@ export function SearchInput({
   setCount,
   searchQuery,
   setSearchQuery,
-  setIsLoading,
   setSearchResult,
   setIsSearchActive,
   isDisabled,
   setIsDisabled,
 }: SearchInputProps) {
+  const { setIsLoading } = useContext(LoadingStateContext);
+
   const handleChange = (value: string) => {
     setSearchQuery(value);
   };

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 
@@ -10,6 +10,7 @@ import { SearchInput } from "../components/SearchInput";
 import { ControlsProps, FetchedJoke } from "../types";
 import { Spinner } from "../components/Spinner";
 import { breakPoint } from "../styles";
+import { LoadingStateContext } from "../utils/LoadingContext";
 
 const StyledControls = styled.div`
   height: 100%;
@@ -42,18 +43,14 @@ const SpinnerContainer = styled.div`
   height: 50px;
 `;
 
-export function Controls({
-  jokesToDisplay,
-  setJokesToDisplay,
-  isLoading,
-  setIsLoading,
-}: ControlsProps) {
+export function Controls({ jokesToDisplay, setJokesToDisplay }: ControlsProps) {
   const [count, setCount] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState<FetchedJoke[]>([]);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const { isLoading, setIsLoading } = useContext(LoadingStateContext);
 
   useEffect(() => {
     if (selectedCategory !== "") {
@@ -111,7 +108,7 @@ export function Controls({
             count={count}
             setCount={setCount}
             searchQuery={searchQuery}
-            setIsLoading={setIsLoading}
+            // setIsLoading={setIsLoading}
             searchResult={searchResult}
             isSearchActive={isSearchActive}
             isDisabled={isDisabled}
@@ -125,7 +122,7 @@ export function Controls({
             setCount={setCount}
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
-            setIsLoading={setIsLoading}
+            // setIsLoading={setIsLoading}
             setSearchResult={setSearchResult}
             setIsSearchActive={setIsSearchActive}
             isDisabled={isDisabled}

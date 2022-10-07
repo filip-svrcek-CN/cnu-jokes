@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { getRandomJokes } from "../api";
 import { JokeCardList } from "../components/JokeCardList";
 import { FetchedJoke } from "../types";
+import { LoadingStateContext } from "../utils/LoadingContext";
 import { Controls } from "./Controls";
 
 export function PageContent() {
   const [jokesToDisplay, setJokesToDisplay] = useState<FetchedJoke[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const { setIsLoading } = useContext(LoadingStateContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -31,8 +32,6 @@ export function PageContent() {
       <Controls
         jokesToDisplay={jokesToDisplay}
         setJokesToDisplay={setJokesToDisplay}
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
       />
       <JokeCardList jokesToDisplay={jokesToDisplay} />
     </div>

@@ -1,10 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import { getRandomJokes } from "../api";
 import { borderRadius, ControlsElementStyle, FocusInputStyle } from "../styles";
 import { CountInputProps } from "../types";
+import { LoadingStateContext } from "../utils/LoadingContext";
 
 const StyledInput = styled.input`
   ${ControlsElementStyle};
@@ -20,13 +21,13 @@ export function CountInput({
   count,
   setCount,
   searchQuery,
-  setIsLoading,
   searchResult,
   isSearchActive,
   isDisabled,
   setIsDisabled,
 }: CountInputProps) {
   const inputElement = useRef<HTMLInputElement>(null);
+  const { setIsLoading } = useContext(LoadingStateContext);
 
   useEffect(() => {
     inputElement.current?.focus();
