@@ -85,7 +85,7 @@ export function CountInput({
         handleCountChange(event);
       }}
       onKeyDown={(event) => {
-        if (event.key === "Enter") {
+        if (event.key === "Enter" && !isSearchActive) {
           handleShowRandom();
         }
       }}
