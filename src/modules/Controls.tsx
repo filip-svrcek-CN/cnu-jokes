@@ -104,6 +104,7 @@ export function Controls() {
             searchQuery={searchQuery}
             searchResult={searchResult}
             isSearchActive={isSearchActive}
+            handleShowRandom={handleShowRandom}
           />
         </FlexItemCounter>
         <FlexItem>

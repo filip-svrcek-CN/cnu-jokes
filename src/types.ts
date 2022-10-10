@@ -24,6 +24,7 @@ export type CountInputProps = {
   searchQuery: string;
   searchResult: FetchedJoke[];
   isSearchActive: boolean;
+  handleShowRandom: () => void;
 };
 
 export type SearchInputProps = {

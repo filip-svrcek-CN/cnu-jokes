@@ -21,6 +21,7 @@ export function CountInput({
   searchQuery,
   searchResult,
   isSearchActive,
+  handleShowRandom,
 }: CountInputProps) {
   const inputElement = useRef<HTMLInputElement>(null);
   const { isLoading, setIsLoading, jokesToDisplay, setJokesToDisplay } =
@@ -82,6 +83,11 @@ export function CountInput({
       ref={inputElement}
       onChange={(event) => {
         handleCountChange(event);
+      }}
+      onKeyDown={(event) => {
+        if (event.key === "Enter") {
+          handleShowRandom();
+        }
       }}
     />
   );
