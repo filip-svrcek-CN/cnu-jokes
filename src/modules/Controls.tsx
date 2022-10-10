@@ -115,6 +115,7 @@ export function Controls() {
             setSearchQuery={setSearchQuery}
             setSearchResult={setSearchResult}
             setIsSearchActive={setIsSearchActive}
+            handleShowRandom={handleShowRandom}
           />
         </FlexItem>
       </StyledControls>

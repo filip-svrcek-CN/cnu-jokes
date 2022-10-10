@@ -21,6 +21,7 @@ export function SearchInput({
   setSearchQuery,
   setSearchResult,
   setIsSearchActive,
+  handleShowRandom,
 }: SearchInputProps) {
   const { isLoading, setIsLoading, setJokesToDisplay } =
     useContext(GlobalStatesContext);
@@ -30,7 +31,9 @@ export function SearchInput({
   };
 
   const handleSearch = () => {
-    if (searchQuery.length < 3) {
+    if (searchQuery.length === 0) {
+      return handleShowRandom();
+    } else if (searchQuery.length < 3) {
       return toast.info("Search needs at least 3 characters");
     }
     setIsLoading(true);

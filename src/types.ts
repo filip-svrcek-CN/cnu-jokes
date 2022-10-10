@@ -34,6 +34,7 @@ export type SearchInputProps = {
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   setSearchResult: React.Dispatch<React.SetStateAction<FetchedJoke[]>>;
   setIsSearchActive: React.Dispatch<React.SetStateAction<boolean>>;
+  handleShowRandom: () => void;
 };
 
 export type ButtonProps = {
